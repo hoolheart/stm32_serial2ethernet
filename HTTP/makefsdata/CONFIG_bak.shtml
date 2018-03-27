@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>UDP-UART Interface Configuration</title>
+</head>
+<body>
+<div style="background-color:#FFFFFF; ">
+<div class="logo">
+    <p class="MsoNormal" style="text-align: center;" align="center">
+        <b><i><span style="font-size: 24pt;"><br><strong>网络-串口转接板</strong></span></i></b>
+        <span style="font-size: 13.5pt;"> </span>
+        <b><span style="font-size: 18pt; color: rgb(51, 51, 255);"><br>基于 STM32 和 lwIP 协议栈</span></b>
+    </p> 
+</div>
+<div class="MsoNormal" style="text-align: center;" align="center"><hr align="center" size="2" width="100%"></div>
+<div align="center">
+<table class="MsoNormalTable" style="width: 700pt;" border="1" cellpadding="0" width="961">
+<tbody>
+<tr style="">
+<td style="padding: 1.5pt; background: rgb(51, 51, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; text-align: center; height:20pt;">
+<p class="MsoNormal"><b><i><span style="font-size: 10pt;"><a href="index.html"><span style="color: white;">主页</span></a></span></i></b><b><i><span><o:p></o:p></span></i></b></p>
+</td>
+<td style="padding: 1.5pt; background: rgb(51, 51, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; text-align: center; height:20pt;">
+<p class="MsoNormal"><b><i><span style="font-size: 10pt;"><a href="CONFIG.shtml"><span style="color: white;">&nbsp;设置</span></a></span></i></b><b><i><span><o:p></o:p></span></i></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div align="center">
+<table class="MsoNormalTable" style="background: white none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span>说明:<o:p></o:p></span></p>
+<ul type="disc">
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+     IP 地址，尤其是本机 IP 地址必须设置为正确的 IP 地址形式，不然可能导致转接板故障<o:p></o:p>
+</span></li>
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+    波特率的有效范围为9600-1152000<o:p></o:p>
+</span></li>
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+    校验设置中，0代表无校验，1代表奇校验，2代表偶校验<o:p></o:p>
+</span></li>
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+    轮询周期的单位为s，有效范围1-255<o:p></o:p>
+</span></li>
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+    点击“设置并重启”后，参数就上传到设备，设备更新设置后自动重启，若 IP 地址被修改，需要更改地址栏的 IP 地址后才可以刷新<o:p></o:p>
+</span></li>
+<li class="MsoNormal" style=""><span style="font-size: 10pt;">
+    刷新页面即可得到当前设置参数<o:p></o:p>
+</span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<form  method="get" action="/config.cgi">
+<div align="center">
+<table class="MsoNormalTable" style="background: white none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span></span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center"><input value="设置并重启" type="submit" style="font-weight: bold;"></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span>网络设置</span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">IP 地址</td>
+<td style="padding: 0cm;" valign="center">
+   <input type="text" name="local_ip" style="width:200pt;" value="<!--#lip-->" />
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">子网掩码</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="mask" value="<!--#lmask-->" style="width:200pt;"/>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">网关 IP</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="gate" value="<!--#lgate-->" style="width:200pt;"/>
+</td>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span>通信设置</span></p>
+</td>
+</tr>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">监听端口</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="lport" value="<!--#lport-->" style="width:200pt;"/>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">上报 IP</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="rip" value="<!--#rip-->" style="width:200pt;"/>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">上报端口</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="rport" value="<!--#rport-->" style="width:200pt;"/>
+</td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span>串口设置</span></p>
+</td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道</td>
+<td style="padding: 0cm;" valign="center">波特率</td>
+<td style="padding: 0cm;" valign="center">校验</td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道1</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt01" value="<!--#bt01-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p01" value="<!--#p01-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道2</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt02" value="<!--#bt02-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p02" value="<!--#p02-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道3</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt03" value="<!--#bt03-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p03" value="<!--#p03-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道4</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt04" value="<!--#bt04-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p04" value="<!--#p04-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道5</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt05" value="<!--#bt05-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p05" value="<!--#p05-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道6</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt06" value="<!--#bt06-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p06" value="<!--#p06-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道7</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt07" value="<!--#bt07-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p07" value="<!--#p07-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道8</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt08" value="<!--#bt08-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p08" value="<!--#p08-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道9</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt09" value="<!--#bt09-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p09" value="<!--#p09-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道10</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt10" value="<!--#bt10-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p10" value="<!--#p10-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道11</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt11" value="<!--#bt11-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p11" value="<!--#p11-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道12</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt12" value="<!--#bt12-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p12" value="<!--#p12-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道13</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt13" value="<!--#bt13-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p13" value="<!--#p13-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道14</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt14" value="<!--#bt14-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p14" value="<!--#p14-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道15</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt15" value="<!--#bt15-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p15" value="<!--#p15-->" style="width:200pt;"/></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center">通道16</td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="bt16" value="<!--#bt16-->" style="width:200pt;"/></td>
+<td style="padding: 0cm;" valign="center"><input type="text" name="p16" value="<!--#p16-->" style="width:200pt;"/></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span>工作参数</span></p>
+</td>
+</tr>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center">轮询周期</td>
+<td style="padding: 0cm;" valign="center">
+    <input type="text" name="cylce" value="<!--#cycle-->" style="width:200pt;"/>
+</td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span></span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center"><input value="设置并重启" type="submit" style="font-weight: bold;"></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+</form>
+
+<div align="center">
+<table class="MsoNormalTable" style="background: white none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+<tr style="">
+<td style="padding: 0cm;" valign="top">
+<p class="MsoNormal"><span style="font-size: 10pt;color:red;">
+<!--#status-->
+</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

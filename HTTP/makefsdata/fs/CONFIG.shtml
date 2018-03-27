@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>UDP-UART Interface Configuration</title>
+</head>
+<body>
+<div style="background-color:#FFFFFF; ">
+<div>
+    <p style="text-align: center;" align="center">
+        <b><i><span style="font-size: 24pt;"><br><strong>网络-串口转接板</strong></span></i></b>
+        <span style="font-size: 13.5pt;"> </span>
+        <b><span style="font-size: 18pt; color: rgb(51, 51, 255);"><br>基于 STM32 和 lwIP 协议栈</span></b>
+    </p> 
+</div>
+<div style="text-align: center;" align="center"><hr align="center" size="2" width="100%"></div>
+<div align="center">
+<table style="width: 700pt;" border="1" cellpadding="0" width="961">
+<tbody>
+<tr style="">
+<td style="padding: 0pt; background: rgb(51, 51, 255) none repeat scroll 0% 50%; text-align: center;">
+<p><b><i><span style="font-size: 10pt;"><a href="index.html"><span style="color: white;">主页</span></a></span></i></b></p>
+</td>
+<td style="padding: 0pt; background: rgb(51, 51, 255) none repeat scroll 0% 50%; text-align: center;">
+<p><b><i><span style="font-size: 10pt;"><a href="CONFIG.shtml"><span style="color: white;">&nbsp;设置</span></a></span></i></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div align="center">
+<table style="background: white none repeat scroll 0% 50%; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span>说明:<o:p></o:p></span></p>
+<ul type="disc">
+<li style=""><span style="font-size: 10pt;">
+IP 地址，尤其是本机 IP 地址必须设置为正确的 IP 地址形式，不然可能导致转接板故障<o:p></o:p>
+</span></li>
+<li style=""><span style="font-size: 10pt;">
+波特率的有效范围为1200-460800bps<o:p></o:p>
+</span></li>
+<li style=""><span style="font-size: 10pt;">
+校验设置中，0代表无校验，1代表奇校验，2代表偶校验<o:p></o:p>
+</span></li>
+<li style=""><span style="font-size: 10pt;">
+轮询周期的单位为s，有效范围1-255<o:p></o:p>
+</span></li>
+<li style=""><span style="font-size: 10pt;">
+点击“设置”后，参数就上传到设备并自动刷新页面，点击“重启”后生效<o:p></o:p>
+</span></li>
+<li style=""><span style="font-size: 10pt;">
+刷新页面即可得到当前设置参数<o:p></o:p>
+</span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<form  method="get" action="/config.cgi">
+<div align="center">
+<table style="background: white none repeat scroll 0% 50%; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span></span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left"><input value="设置" type="submit" style="font-weight: bold;"></td>
+<td style="padding: 0cm;" valign="center" align="left"><input value="重启" type="submit" formaction="/reboot.cgi" style="font-weight: bold;"></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span>网络设置</span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">IP 地址</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#lip--></td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">子网掩码</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#lmask--></td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">网关 IP</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#lgate--></td>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span>通信设置</span></p>
+</td>
+</tr>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">监听端口</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#lport--></td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">上报 IP</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#rip--></td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">上报端口</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#rport--></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span>串口设置</span></p>
+</td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道</td>
+<td style="padding: 0cm;" valign="center" align="left">波特率</td>
+<td style="padding: 0cm;" valign="center" align="left">校验</td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道1</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt01--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p01--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道2</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt02--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p02--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道3</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt03--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p03--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道4</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt04--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p04--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道5</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt05--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p05--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道6</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt06--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p06--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道7</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt07--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p07--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道8</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt08--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p08--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道9</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt09--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p09--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道10</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt10--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p10--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道11</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt11--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p11--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道12</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt12--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p12--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道13</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt13--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p13--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道14</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt14--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p14--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道15</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt15--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p15--></td>
+</tr>
+<tr>
+<td style="padding: 0cm;" valign="center" align="left">通道16</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#bt16--></td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#p16--></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span>工作参数</span></p>
+</td>
+</tr>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">轮询周期</td>
+<td style="padding: 0cm;" valign="center" align="left"><!--#cycle--></td>
+</tr>
+
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span></span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left"><input value="设置" type="submit" style="font-weight: bold;"></td>
+<td style="padding: 0cm;" valign="center" align="left"><input value="重启" type="submit" formaction="/reboot.cgi" style="font-weight: bold;"></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+</form>
+
+<div align="center">
+<table style="background: white none repeat scroll 0% 50%; width: 574.5pt;" border="0" cellpadding="0" cellspacing="0" width="766">
+<tbody>
+<tr style="">
+<td style="padding: 0cm;" valign="center" align="left">
+<p><span style="font-size: 10pt;color:red;">
+<!--#status-->
+</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
